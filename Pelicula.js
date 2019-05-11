@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const URL_MONGO = 'mongodb+srv://dany:<password>@cluster0-ijbr8.mongodb.net/test?retryWrites=true'
+const URL_MONGO = 'mongodb+srv://dany:ponysalvaje@cluster0-ijbr8.mongodb.net/test?retryWrites=true'
 
 mongoose.connect(URL_MONGO, { useNewUrlParser: true },(err)=>{
     if(err){

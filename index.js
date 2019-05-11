@@ -22,4 +22,20 @@ function crearPelicula(){
     })
 }
 
-crearPelicula();
+function mostrarPeliculas(){
+    Pelicula.find().exec()
+    .then(peliculas =>{
+        peliculas ? console.log(peliculas) : console.log('No hay peliculas')
+    }).catch(err=> console.log('Error: ', err))
+}
+
+function borrarPelicula(idPeli) {
+    Pelicula.deleteOne({_id: idPeli}).exec()
+    .then(resp =>{
+        resp ? console.log('respuesta', resp) : console.log('No hay peliculas')
+    }).catch(err=> console.log('Error: ', err))
+}
+
+// crearPelicula();
+borrarPelicula('5ca414b6311c5b1bd3f54e43');
+mostrarPeliculas();
