@@ -29,26 +29,15 @@ const peliSchema = new Schema({
     portada_url: String,
     directores: {
         type: [{
-            name: {
-                type: String,
-                required: true
-            },
-            edad: {
-                type: Number,
-                default: 18
-            },
-            nacionalidad: String
+            type: Schema.Types.ObjectId,
+            ref: 'Director'
         }],
         required: true
     },
     actores:{
         type:[{
-            name: String,
-            edad: {
-                type: Number,
-                default: 18
-            },
-            nacionalidad: String
+            type: Schema.Types.ObjectId,
+            ref: 'Actor'
         }]
     }
 },{timestamps: true});
