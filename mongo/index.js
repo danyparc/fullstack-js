@@ -43,6 +43,35 @@ app.get('/peliculas',(req, res)=>{
         })
 });
 
+//PARAMS
+app.get('/peliculas/:id', (req,res)=>{
+    Ctrl.pelicula.mostrarPeliculas(req.params.id)
+        .then(peli=> peli ? res.send(peli) : res.send({}).statusCode(400))
+        .catch(err=> res.send(err).statusCode(400));
+})
+
+app.get('/actores',(req, res)=>{
+    Ctrl.actor.mostrarActores()
+        .then(actores=> actores ? res.send(actores) : res.send({}).statusCode(400))
+        .catch(err=> res.send(err).statusCode(400));
+})
+app.get('/actores/:id',(req, res)=>{
+    Ctrl.actor.mostrarActores(req.params.id)
+        .then(actores=> actores ? res.send(actores) : res.send({}).statusCode(400))
+        .catch(err=> res.send(err).statusCode(400));
+})
+
+app.get('/directores',(req, res)=>{
+    Ctrl.director.mostrarDirectores()
+        .then(directores=> directores ? res.send(directores) : res.send({}).statusCode(400))
+        .catch(err=> res.send(err).statusCode(400));
+})
+app.get('/directores/:id',(req, res)=>{
+    Ctrl.director.mostrarDirectores(req.params.id)
+        .then(directores=> directores ? res.send(directores) : res.send({}).statusCode(400))
+        .catch(err=> res.send(err).statusCode(400));
+})
+
 app.listen(PORT,()=>{
     console.log('App escuchando en el puerto '+PORT);
 })

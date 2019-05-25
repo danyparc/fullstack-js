@@ -16,7 +16,14 @@ pelicula.crearPelicula = function(pelicula){
     })
 }
 
-pelicula.mostrarPeliculas = function(populate = false){
+pelicula.mostrarPeliculas = function(id = '', populate = false){
+    if(id){
+        return Pelicula
+            .findById(id)
+            .populate('directores')
+            .populate('actores')
+            .exec();
+    }
     const find = populate ? Pelicula.find().populate('directores').populate('actores') : Pelicula.find();
     return find.exec();
 }
@@ -45,6 +52,10 @@ director.crearDirector = function (director) {
     });
 }
 
+director.mostrarDirectores = function(id=''){
+    return id ? Director.findById(id).exec() : Director.find().exec();
+}
+
 const actor = {}
 
 actor.crearActor = function (actor) {
@@ -54,6 +65,10 @@ actor.crearActor = function (actor) {
         ? console.log('Algo falló', err)
         : console.log('Ok: ', act); 
     });
+}
+
+actor.mostrarActores = function(id=''){
+    return id ? Actor.findById(id).exec() : Actor.find().exec();
 }
 
 
