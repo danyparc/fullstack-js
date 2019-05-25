@@ -18,19 +18,7 @@ pelicula.crearPelicula = function(pelicula){
 
 pelicula.mostrarPeliculas = function(populate = false){
     const find = populate ? Pelicula.find().populate('directores').populate('actores') : Pelicula.find();
-
-    find.exec()
-    .then(peliculas =>{
-        if(!peliculas){
-            console.log('No hay peliculas')
-        }else if(populate){
-            console.log(peliculas);
-            console.log('Populate directores', peliculas[1].directores) 
-            console.log('Populate actores', peliculas[1].actores) 
-        }else{
-            console.log('Peliculas: ', peliculas);
-        }
-    }).catch(err=> console.log('Error: ', err))
+    return find.exec();
 }
 pelicula.borrarPelicula = function (idPeli) {
     Pelicula.deleteOne({_id: idPeli}).exec()

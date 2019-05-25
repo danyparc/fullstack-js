@@ -1,13 +1,4 @@
 const mongoose = require('mongoose');
-const URL_MONGO = 'mongodb+srv://dany:ponysalvaje@cluster0-ijbr8.mongodb.net/test?retryWrites=true'
-
-mongoose.connect(URL_MONGO, { useNewUrlParser: true },(err)=>{
-    if(err){
-        console.log('Hubo un error', err);
-    }else{
-        console.log('Conexión exitosa');
-    }
-});
 
 const Schema = mongoose.Schema;
 
