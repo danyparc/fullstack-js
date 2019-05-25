@@ -2,6 +2,8 @@ const express = require('express');
 const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const Ctrl = require('./controllers/index');
+const {Pelicula} = require('./models/Pelicula');
+const {Director} = require('./models/Director');
 
 const app = express();
 
@@ -50,6 +52,41 @@ app.get('/peliculas/:id', (req,res)=>{
         .catch(err=> res.send(err).statusCode(400));
 })
 
+app.post('/peliculas',(req,res)=>{
+    const objPelicula = req.body;
+    // Primero debemos ver si existe director:
+    if(!objPelicula.directores){
+        res.send('Ingresar director valido').statusCode(406)
+    }else{
+        // Pendiente
+        // objPelicula.directores = subirDirectores(objPelicula.directores, res);
+        console.log("\n\n***PELI****",objPelicula,"\n\n");
+        
+        const nuevaPeli = Pelicula(objPelicula);
+        nuevaPeli.save((err, peli)=>{
+            err ? res.send(err).statusCode(400) 
+            : res.send(peli).statusCode(201);
+        });
+    }
+});
+
+async function subirDirectores(directores, res){
+    let idsDirectores = []
+    await directores.map((dir, i) => {
+        Director(dir).save((err,director)=>{
+            if(err){
+                res.send('Error al subir director '+i, err).statusCode(406);
+            }else{
+                idsDirectores.push(director.id)
+            }
+        })
+    });
+    return idsDirectores;
+}
+
+
+//ACTORES
+
 app.get('/actores',(req, res)=>{
     Ctrl.actor.mostrarActores()
         .then(actores=> actores ? res.send(actores) : res.send({}).statusCode(400))
@@ -61,6 +98,8 @@ app.get('/actores/:id',(req, res)=>{
         .catch(err=> res.send(err).statusCode(400));
 })
 
+//DIRECTORES
+
 app.get('/directores',(req, res)=>{
     Ctrl.director.mostrarDirectores()
         .then(directores=> directores ? res.send(directores) : res.send({}).statusCode(400))
@@ -71,6 +110,7 @@ app.get('/directores/:id',(req, res)=>{
         .then(directores=> directores ? res.send(directores) : res.send({}).statusCode(400))
         .catch(err=> res.send(err).statusCode(400));
 })
+
 
 app.listen(PORT,()=>{
     console.log('App escuchando en el puerto '+PORT);
