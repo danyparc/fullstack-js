@@ -89,11 +89,11 @@ async function subirDirectores(directores) {
 //ACTORES
 app.get('/actores', (req, res) => {
 	console.log(req.query)
-	if (!req.query) {
+	if (!req.query.name) {
 		Actor.find().exec((err, actores) => {
 			err ? res.status(400).send(err) : res.send(actores);
 		})
-	} else if(req.query.name){
+	} else{
 		Actor.fuzzySearch(req.query.name, (err, actores) => {
 			err ? res.status(400).send(err) : res.send(actores);
 		})
