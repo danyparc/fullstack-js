@@ -120,6 +120,11 @@ app.put('/actores/:id', (req, res) => {
 	//     err ? res.status(400).send(err) : res.status(200).send(actor);
 	// })
 });
+app.delete('/actores/:id',(req, res)=>{
+	Actor.findByIdAndDelete(req.params.id,(err, delres)=>{
+		err ? res.status(400).send(err) : res.send(delres);
+	})
+})
 
 
 
