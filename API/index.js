@@ -5,8 +5,10 @@ const Ctrl = require('./controllers/index');
 const { Pelicula } = require('./models/Pelicula');
 const { Director } = require('./models/Director');
 const { Actor } = require('./models/Actor');
-const app = express();
+const cors = require('cors');
 
+const app = express();
+app.use(cors());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
