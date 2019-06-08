@@ -36,7 +36,7 @@ class SubirActor extends Component {
 
 	render() {
 		return (
-			<container className="container">
+			<div className="container">
 				<h1>Registrar un nuevo actor</h1>
 				<div className="row justify-content-md-center">
 					<div className="col-md-auto">
@@ -68,7 +68,7 @@ class SubirActor extends Component {
 						</form>
 					</div>
 				</div>
-			</container>
+			</div>
 		);
 	}
 }
