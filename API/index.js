@@ -31,6 +31,10 @@ mongoose.connect(URL_MONGO, { useNewUrlParser: true }, (err) => {
 	}
 });
 
+app.get('/', (req, res)=>{
+	res.send('<h1>Bienvenido a mi API de pelischidas</h1>');
+})
+
 app.get('/peliculas', (req, res) => {
 	Ctrl.pelicula.mostrarPeliculas()
 		.then(peliculas => {
